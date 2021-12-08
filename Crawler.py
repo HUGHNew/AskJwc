@@ -3,13 +3,15 @@ import re
 from utility import *
 
 # maybe these urls should store in a json file
-login_url = "http://zhjw.scu.edu.cn/j_spring_security_check"
-captcha_url = "http://zhjw.scu.edu.cn/img/captcha.jpg"
-class_course_table = "http://zhjw.scu.edu.cn/student/teachingResources/classCurriculum/searchCurriculumInfo/callback"
-student_course_url = "http://zhjw.scu.edu.cn/student/courseSelect/thisSemesterCurriculum/ajaxStudentSchedule/past/callback"
-scores_url = "http://zhjw.scu.edu.cn/student/integratedQuery/scoreQuery/schemeScores/callback"
-courses_search_url = "http://zhjw.scu.edu.cn/student/integratedQuery/course/courseBasicInformation/show"
-exam_plan_url = "http://zhjw.scu.edu.cn/student/examinationManagement/examPlan/index"  # all info is in the response
+root = "http://zhjw.scu.edu.cn/"
+root_stu = root + "student/"
+login_url = root + "j_spring_security_check"
+captcha_url = root + "img/captcha.jpg"
+class_course_table = root_stu + "teachingResources/classCurriculum/searchCurriculumInfo/callback"
+student_course_url = root_stu + "courseSelect/thisSemesterCurriculum/ajaxStudentSchedule/past/callback"
+scores_url = root_stu + "integratedQuery/scoreQuery/schemeScores/callback"
+courses_search_url = root_stu + "integratedQuery/course/courseBasicInformation/show"
+exam_plan_url = root_stu + "examinationManagement/examPlan/index"  # all info is in the response
 filepath = ".local/"
 class_info = filepath + "class.json"
 payload = filepath + "payload.json"
