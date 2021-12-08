@@ -6,7 +6,6 @@ from utility import *
 login_url = "http://zhjw.scu.edu.cn/j_spring_security_check"
 captcha_url = "http://zhjw.scu.edu.cn/img/captcha.jpg"
 class_course_table = "http://zhjw.scu.edu.cn/student/teachingResources/classCurriculum/searchCurriculumInfo/callback"
-# "http://zhjw.scu.edu.cn/student/teachingResources/classCurriculum/searchCurriculumInfo/callback"
 student_course_url = "http://zhjw.scu.edu.cn/student/courseSelect/thisSemesterCurriculum/ajaxStudentSchedule/past/callback"
 scores_url = "http://zhjw.scu.edu.cn/student/integratedQuery/scoreQuery/schemeScores/callback"
 courses_search_url = "http://zhjw.scu.edu.cn/student/integratedQuery/course/courseBasicInformation/show"
