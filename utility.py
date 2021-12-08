@@ -13,6 +13,7 @@ class CrawlType(Enum):
 
 
 norm_class_header = "课程名,课序号,教师名,上课周数,上课节数,上课地点"
+exam_csv_headers = "课程名,考试日期,考试时间,考试地点,座位号"
 filepath = ".local/"
 
 
@@ -63,12 +64,13 @@ class Utility:
         head = norm_class_header + "\n"
         body = "\n".join([course for course
                           in map(lambda c: Utility.norm_class_str(c), content)])
+        msg = head + body
         if save:
             with open(save_file_base + ".csv", "w", encoding='utf8') as fd:
-                fd.write(head + body)
+                fd.write(msg)
         else:
-            print(head + body)
-        pass  # todo
+            print(msg)
+        return msg
 
     @staticmethod
     def norm_student(file: str, save: bool = False, *, is_file: bool = True):
@@ -81,6 +83,30 @@ class Utility:
         pass  # todo
 
     @staticmethod
-    def norm_info(file: str, save: bool = False, *, is_file: bool = True):
-        content = Utility.norm_base(file) if is_file else file
-        pass  # todo
+    def norm_exam(file: str, save: bool = False, *,
+                  is_file: bool = True, savefile=filepath + "exam.csv"):
+        """
+        normalization exam info
+        """
+        html = Utility.norm_base(file) if is_file else file
+        course_list_pat = '<div class="widget-box widget-color-blue">(.*)</div>'  # phase one
+        course_pat = '<h5 class="widget-title smaller">(.*?)</h5>.*?<div class="widget-main">(.*?)</div>'  # phase two
+        # tuples [0] -- name [1] -- info
+        all_exam_courses = re.findall(course_pat, re.findall(course_list_pat, html)[0])
+
+
+        def get_exam_item(it):
+            name = it[0].split("）", 1)[1]
+            rel = it[1].split("&nbsp;")
+            # print(it)
+            get = lambda x: x.split("</br>")[0]
+            return [name, rel[3], get(rel[5]), get(rel[7]) + get(rel[8]), get(rel[9])]
+
+        body = [",".join(get_exam_item(item)) for item in all_exam_courses]
+        msg = "\n".join([exam_csv_headers, *body])
+        if save:
+            with open(savefile, encoding="utf8") as exam:
+                exam.write(msg)
+        else:
+            print(msg)
+        return msg

@@ -16,8 +16,16 @@ write to file ($cmd.csv) and
 inline command
 - [x] login
 - [x] exam
-- [x] table [term] [class]
+- [x] table
 - [ ] search
 - [ ] score
 - [x] exit
 - [x] help
+
+| 解释器指令 | 功能 |
+| :---: | :---: |
+| login | 登录 |
+| exam | 获取考表 |
+| table | 获取班级课表 |
+| exit | 退出 |
+| help | 查看帮助 |
