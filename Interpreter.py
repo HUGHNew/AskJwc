@@ -35,7 +35,7 @@ class Interpreter:
             pass
 
     def parse(self, command: str) -> bool:
-        print(f"command:{command}")
+        # print(f"command:{command}")
         if command == "": return True
         self.__process = "help" if command == "?" else command
         try:
