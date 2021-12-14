@@ -1,3 +1,9 @@
 .local/
 .idea/
 __pycache__/
+
+*.pdf
+*.zip
+*.tar
+*.tar*
+*.rar
