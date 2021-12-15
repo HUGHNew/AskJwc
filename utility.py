@@ -11,7 +11,7 @@ class CrawlType(Enum):
     Course_Info = "info"
     Exam_Plan = "exam"
 
-
+# csv first column
 norm_class_header = "课程名,课序号,教师名,上课周数,上课节数,上课地点"
 exam_csv_headers = "课程名,考试日期,考试时间,考试地点,座位号"
 filepath = ".local/"
@@ -36,7 +36,7 @@ def md5(data: str):
 def md5_interact(prompt: str):
     return md5(input(prompt))
 
-
+# normalize the info to csv format that the crawler fetched
 class Utility:
     @staticmethod
     def normalize_create(info_type: CrawlType):
@@ -92,6 +92,7 @@ class Utility:
         course_list_pat = '<div class="widget-box widget-color-blue">(.*)</div>'  # phase one
         course_pat = '<h5 class="widget-title smaller">(.*?)</h5>.*?<div class="widget-main">(.*?)</div>'  # phase two
         # tuples [0] -- name [1] -- info
+        # get exam items by regex
         all_exam_courses = re.findall(course_pat, re.findall(course_list_pat, html)[0])
 
 

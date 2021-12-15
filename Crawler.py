@@ -12,11 +12,26 @@ student_course_url = root_stu + "courseSelect/thisSemesterCurriculum/ajaxStudent
 scores_url = root_stu + "integratedQuery/scoreQuery/schemeScores/callback"
 courses_search_url = root_stu + "integratedQuery/course/courseBasicInformation/show"
 exam_plan_url = root_stu + "examinationManagement/examPlan/index"  # all info is in the response
+course_query_url = root_stu +  "courseSelect/freeCourse/courseList" # POST
+
+# courses select region
+
+course_select_query = root_stu + "courseSelect/selectResult/query"
+
+# courses select endregion
+
 filepath = ".local/"
 class_info = filepath + "class.json"
 payload = filepath + "payload.json"
 header = filepath + "header.json"
+course_query_payload={
+    "searchtj": "", # 搜索内容
+    "xq": 0, # 星期 0代表所有
+    "jc": 0, # 节次
+    "kclbdm": None # 课程类别
+    # 空为全部
 
+}
 
 def calc_default_term(start_year: int) -> int:
     """

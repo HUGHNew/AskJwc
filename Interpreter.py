@@ -33,7 +33,7 @@ class Interpreter:
     def run(self):
         while self.parse(input(self.__prompt)):
             pass
-
+    # main functional part
     def parse(self, command: str) -> bool:
         # print(f"command:{command}")
         if command == "": return True
@@ -49,7 +49,7 @@ class Interpreter:
         return True
 
     def login(self):
-        try:
+        try:# ensure a header exists
             if not os.path.exists(self.__headerc):
                 print(f"header file <{self.__headerc}> not exists, aborted")
                 raise EnvironmentError
@@ -63,18 +63,19 @@ class Interpreter:
             succeed, msg = self.__spider.login()
             print("成功登录" if succeed else msg)
             return succeed
-
+    # get exams table
     def exam(self):
         if self.__spider.get_exam(True):
             ShowCsv(filepath + "exam.csv")
         else:
             print("获取考表错误")
-
+    # get class courses
     def table(self, term: int = None, class_id: str = None):
         year = int(self.__spider.payload["j_username"][:4])
         if not term:
             term = calc_default_term(year)
         plan_code = CoursesCrawl.calc_plan_code(year, term)
+        # judge whether the critical classId info exists
         if not class_id:
             if os.path.exists(self.__classrc):
                 class_id = self.__spider.class_id
@@ -83,12 +84,6 @@ class Interpreter:
         code = self.__spider.search_table(term=plan_code, classId=class_id)
         if code:
             ShowCsv(filepath + "table.csv")
-
-    def search(self):
-        pass
-
-    def score(self):
-        pass
 
     def help(self):
         print(Interpreter.usage)
